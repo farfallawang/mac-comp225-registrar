@@ -10,14 +10,14 @@ import java.util.Set;
  */
 public class Course {
 
-    private Set<Student> enrolledIn;
+    private Set<Student> studentEnrolled;
     private List<Student> waitlist;
     private String number;
     private String name;
     private int limit;
 
     public Course(){
-        enrolledIn = new HashSet<>();
+        studentEnrolled = new HashSet<>();
         waitlist = new ArrayList<>();
         limit = 16;
     }
@@ -36,7 +36,7 @@ public class Course {
 
     public boolean setEnrollmentLimit(int limit){
         //If students are enrolled you can't change the limit
-        if (enrolledIn.size() == 0){
+        if (studentEnrolled.size() == 0){
             this.limit = limit;
             return true;
         }
@@ -44,7 +44,7 @@ public class Course {
     }
 
     public Set<Student> getStudents(){
-        return enrolledIn;
+        return studentEnrolled;
     }
 
     public List<Student> getWaitList(){
@@ -52,26 +52,26 @@ public class Course {
     }
 
     public boolean enrollIn(Student s){
-        if (enrolledIn.contains(s)){
+        if (studentEnrolled.contains(s)){
             return true;
         }
-        if (enrolledIn.size() >= limit){
+        if (studentEnrolled.size() >= limit){
             if (waitlist.contains(s)){
                 return false;
             }
             waitlist.add(s);
             return false;
         }
-        enrolledIn.add(s);
+        studentEnrolled.add(s);
         return true;
     }
 
     public void dropStudent(Student s){
-        if (enrolledIn.contains(s)) {
-            enrolledIn.remove(s);
+        if (studentEnrolled.contains(s)) {
+            studentEnrolled.remove(s);
             if (waitlist.size() > 0) {
                 Student toEnroll = waitlist.remove(0);
-                enrolledIn.add(toEnroll);
+                studentEnrolled.add(toEnroll);
                 toEnroll.enrolledIn.add(this);
             }
         }

@@ -66,6 +66,7 @@ public class RegistrarTest {
     // ------ Enrollment limits ------
 
     @Test
+
     public void coursesHaveEnrollmentLimits() {
         comp225.setEnrollmentLimit(16);
         assertEquals(16, comp225.getEnrollmentLimit());
